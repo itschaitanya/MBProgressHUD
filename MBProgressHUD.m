@@ -715,22 +715,17 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 #pragma mark - Notifications
 
 - (void)registerForNotifications {
-#if !TARGET_OS_TV
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 
 	[nc addObserver:self selector:@selector(statusBarOrientationDidChange:)
-               name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
-#endif
+			   name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
 }
 
 - (void)unregisterFromNotifications {
-#if !TARGET_OS_TV
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc removeObserver:self name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
-#endif
+	[nc removeObserver:self name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
 }
 
-#if !TARGET_OS_TV
 - (void)statusBarOrientationDidChange:(NSNotification *)notification {
 	UIView *superview = self.superview;
 	if (!superview) {
@@ -739,7 +734,6 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 		[self updateForCurrentOrientationAnimated:YES];
 	}
 }
-#endif
 
 - (void)updateForCurrentOrientationAnimated:(BOOL)animated {
     // Stay in sync with the superview in any case
